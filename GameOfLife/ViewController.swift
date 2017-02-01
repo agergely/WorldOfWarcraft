@@ -10,9 +10,15 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var paletteView: PaletteView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+       
+        let world = WorldOfWarcraft()
+        world.setup()
+        self.paletteView.world = world
+        
+                
     }
 
     override func didReceiveMemoryWarning() {
