@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PaletteView: UIView {
+class PaletteView: UIView, WorldOfWarcraftDelegate {
     
     var world: WorldOfWarcraft? {
         didSet {
@@ -53,16 +53,33 @@ class PaletteView: UIView {
                 
                 let cellFrame = CGRect(x: cellX, y: cellY, width: cellWidth, height: cellHeight)
                 
-                if index % 2 == 0 {
-                    context.setFillColor(UIColor.yellow.cgColor)
-                } else {
-                    context.setFillColor(UIColor.red.cgColor)
+//                if index % 2 == 0 {
+//                    context.setFillColor(UIColor.yellow.cgColor)
+//                } else {
+//                    context.setFillColor(UIColor.red.cgColor)
+//                }
+                var color: UIColor!
+                switch cell.state {
+                case .alive:
+                    color = .green
+                    break
+                
+                case .dead:
+                    color = .yellow
+                    break
+            
+                default:
+                    color = .black
                 }
+                context.setFillColor(color.cgColor)
                 context.addRect(cellFrame)
                 context.fillPath()
             }
-//            UIGraphicsEndImageContext()
+            UIGraphicsEndImageContext()
         }
-        
+    }
+    
+    func worldOfWarcraftNewRound(_ worldOfWarcraft: WorldOfWarcraft) {
+        self.setNeedsDisplay()
     }
 }

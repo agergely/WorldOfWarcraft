@@ -16,8 +16,8 @@ class ViewController: UIViewController {
        
         let world = WorldOfWarcraft()
         world.setup()
+        world.delegate = self.paletteView
         self.paletteView.world = world
-        
                 
     }
 
@@ -27,5 +27,9 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func startButtonPressed(_ sender: Any) {
+       self.paletteView.world?.setup()
+        self.paletteView.world?.startIterate()
+    }
 }
 

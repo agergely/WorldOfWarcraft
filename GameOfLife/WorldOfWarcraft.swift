@@ -9,8 +9,13 @@
 import Foundation
 
 
+protocol WorldOfWarcraftDelegate: class {
+    func worldOfWarcraftNewRound(_ worldOfWarcraft: WorldOfWarcraft)
+}
+
 class WorldOfWarcraft {
     
+    weak var delegate: WorldOfWarcraftDelegate?
     var cells: [Cell]!
     var dimension: Int!
     
@@ -26,25 +31,65 @@ class WorldOfWarcraft {
     
     
     func setup() {
-        self.dimension = 5
+        self.dimension = 6
         self.cells = []
         for i in 0..<self.dimension {
             for j in 0..<self.dimension {
                 let cell = Cell(x: j, y: i)
-                if (i + i) % 2 == 0 {
+//                if (i + j) % 2 == 0 {
+//                    cell.state = .alive
+//                }
+                if i == 4 && j == 3 {
                     cell.state = .alive
                 }
+                
+                if i == 5 && j == 4 {
+                    cell.state = .alive
+                }
+                
+                if i == 3 && j == 5 {
+                    cell.state = .alive
+                }
+                
+                if i == 4 && j == 5 {
+                    cell.state = .alive
+                }
+                
+                if i == 5 && j == 5 {
+                    cell.state = .alive
+                }
+               
                 cells.append(cell)
             }
+        }
+        self.delegate?.worldOfWarcraftNewRound(self)
+    }
+    
+    func startIterate() {
+        if(self.liveCells.count > 0) {
+            let newCells = self.newCells().map { $0.state = .alive }
+            let _ = self.dyingCells().map { $0.state = .dead }
+            
+            self.delegate?.worldOfWarcraftNewRound(self)
+            let deadlineTime = DispatchTime.now() + .seconds(2)
+            DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+                self.startIterate()
+            }
+        } else {
+            print("all dead")
         }
     }
     
     
     
     
-    
     private func newCells() -> [Cell]! {
-        return self.deadCells.filter { self.neighborCells(for: $0).filter { $0.state == .alive }.count == 3 }
+        return self.deadCells.filter {
+            let neighborsCount = self.neighborCells(for: $0).filter {
+                $0.state == .alive }.count
+                
+               return neighborsCount == 3
+        }
     }
     
     private func dyingCells() -> [Cell]! {
@@ -55,7 +100,9 @@ class WorldOfWarcraft {
     }
 
     private func neighborCells(for cell: Cell) -> [Cell]! {
-        return self.cells.filter { $0.areNeighboring(other: cell) }
+        
+        let neighbors = self.cells.filter { $0.areNeighboring(other: cell) }
+        return neighbors
     }
 
 }
