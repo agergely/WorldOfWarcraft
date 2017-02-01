@@ -19,16 +19,19 @@ class PaletteView: UIView, WorldOfWarcraftDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.world = nil
+        self.setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.world = nil
+        self.setup()
     }
     
 
     private func setup() {
-    
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        self.addGestureRecognizer(tapRecognizer)
     }
     
     
@@ -58,6 +61,7 @@ class PaletteView: UIView, WorldOfWarcraftDelegate {
 //                } else {
 //                    context.setFillColor(UIColor.red.cgColor)
 //                }
+                cell.frame = cellFrame
                 var color: UIColor!
                 switch cell.state {
                 case .alive:
@@ -83,5 +87,27 @@ class PaletteView: UIView, WorldOfWarcraftDelegate {
     
     func worldOfWarcraftNewRound(_ worldOfWarcraft: WorldOfWarcraft) {
         self.setNeedsDisplay()
+    }
+    
+    func handleTap(_ tapRecognizer: UITapGestureRecognizer) {
+        
+        guard  let world = self.world else {
+            return
+        }
+        
+        let touchPoint = tapRecognizer.location(in: self)
+        
+        
+        for cell in world.cells {
+            if (cell.frame.contains(touchPoint)) {
+                if cell.state == .alive {
+                    cell.state = .dead
+                } else {
+                    cell.state = .alive
+                }
+                self.setNeedsDisplay()
+                break
+            }
+        }
     }
 }

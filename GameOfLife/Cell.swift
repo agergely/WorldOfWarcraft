@@ -6,7 +6,7 @@
 //  Copyright © 2017 OTT-ONE. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum State {
     case alive, dead, neverLived
@@ -17,11 +17,13 @@ class Cell {
     
     let x,y: Int
     var state: State
+    var frame: CGRect
     
     init(x: Int, y: Int) {
         self.x = x
         self.y = y
         self.state = .neverLived
+        self.frame = CGRect.zero
     }
     
     
