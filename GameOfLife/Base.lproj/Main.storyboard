@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,8 +23,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctj-UL-aHp" customClass="PaletteView" customModule="GameOfLife" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="12.5" y="20" width="350" height="350"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="0kx-5b-RHb"/>
+                                    <constraint firstAttribute="width" secondItem="ctj-UL-aHp" secondAttribute="height" multiplier="1:1" id="oka-Xe-ydr"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="clX-n4-BiW">
                                 <rect key="frame" x="175" y="617" width="200" height="50"/>
@@ -41,10 +46,8 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="clX-n4-BiW" secondAttribute="trailing" id="BTS-mf-Hgf"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="clX-n4-BiW" secondAttribute="bottom" id="MWw-0c-7xh"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ctj-UL-aHp" secondAttribute="bottom" id="U14-KJ-d9W"/>
                             <constraint firstItem="ctj-UL-aHp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Ze4-ho-fec"/>
-                            <constraint firstItem="ctj-UL-aHp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="afL-ew-HF8"/>
-                            <constraint firstAttribute="trailing" secondItem="ctj-UL-aHp" secondAttribute="trailing" id="sHY-8w-e8u"/>
+                            <constraint firstItem="ctj-UL-aHp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iGg-Gw-sDf"/>
                         </constraints>
                     </view>
                     <connections>

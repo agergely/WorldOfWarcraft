@@ -26,9 +26,9 @@ class PaletteView: UIView, WorldOfWarcraftDelegate {
         self.world = nil
     }
     
-    init(world: WorldOfWarcraft) {
-        super.init(frame: CGRect.zero)
-        self.world = world
+
+    private func setup() {
+    
     }
     
     
@@ -41,17 +41,17 @@ class PaletteView: UIView, WorldOfWarcraftDelegate {
         let dimension = world.dimension
         let viewWidth = self.frame.size.width
         let viewHeight = self.frame.size.height
-        let cellWidth = viewWidth / CGFloat(dimension!)
-        let cellHeight = viewHeight / CGFloat(dimension!)
+        let cellWidth = Int(viewWidth / CGFloat(dimension!))
+        let cellHeight = Int(viewHeight / CGFloat(dimension!))
         
         
         if let context = UIGraphicsGetCurrentContext() {
         
             for (index,cell) in world.cells.enumerated() {
-                let cellX = CGFloat(cell.x) * cellWidth as CGFloat
-                let cellY = CGFloat(cell.y) * cellHeight as CGFloat
+                let cellX = (cell.x) * Int(cellWidth)
+                let cellY = (cell.y) * Int(cellHeight)
                 
-                let cellFrame = CGRect(x: cellX, y: cellY, width: cellWidth, height: cellHeight)
+                let cellFrame = CGRect(x: Int(cellX), y: Int(cellY), width: cellWidth, height: cellHeight)
                 
 //                if index % 2 == 0 {
 //                    context.setFillColor(UIColor.yellow.cgColor)
@@ -72,7 +72,9 @@ class PaletteView: UIView, WorldOfWarcraftDelegate {
                     color = .black
                 }
                 context.setFillColor(color.cgColor)
+                       context.setStrokeColor(UIColor.purple.cgColor)
                 context.addRect(cellFrame)
+         
                 context.fillPath()
             }
             UIGraphicsEndImageContext()

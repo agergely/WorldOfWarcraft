@@ -20,18 +20,18 @@ class WorldOfWarcraft {
     var dimension: Int!
     
     
-    var liveCells: [Cell]! {
+    func liveCells() -> [Cell]! {
         return self.cells.filter { $0.state == .alive }
     }
     
-    var deadCells: [Cell]! {
+    func deadCells() -> [Cell]! {
         return self.cells.filter { $0.state != .alive }
     }
     
     
     
     func setup() {
-        self.dimension = 6
+        self.dimension = 20
         self.cells = []
         for i in 0..<self.dimension {
             for j in 0..<self.dimension {
@@ -39,11 +39,31 @@ class WorldOfWarcraft {
 //                if (i + j) % 2 == 0 {
 //                    cell.state = .alive
 //                }
-                if i == 4 && j == 3 {
+//                if i == 4 && j == 3 {
+//                    cell.state = .alive
+//                }
+//                
+//                if i == 5 && j == 4 {
+//                    cell.state = .alive
+//                }
+//                
+//                if i == 3 && j == 5 {
+//                    cell.state = .alive
+//                }
+//                
+//                if i == 4 && j == 5 {
+//                    cell.state = .alive
+//                }
+//                
+//                if i == 5 && j == 5 {
+//                    cell.state = .alive
+//                }
+               
+                if i == 3 && j == 3 {
                     cell.state = .alive
                 }
                 
-                if i == 5 && j == 4 {
+                if i == 3 && j == 4 {
                     cell.state = .alive
                 }
                 
@@ -51,14 +71,8 @@ class WorldOfWarcraft {
                     cell.state = .alive
                 }
                 
-                if i == 4 && j == 5 {
-                    cell.state = .alive
-                }
                 
-                if i == 5 && j == 5 {
-                    cell.state = .alive
-                }
-               
+                
                 cells.append(cell)
             }
         }
@@ -66,12 +80,17 @@ class WorldOfWarcraft {
     }
     
     func startIterate() {
-        if(self.liveCells.count > 0) {
-            let newCells = self.newCells().map { $0.state = .alive }
-            let _ = self.dyingCells().map { $0.state = .dead }
+        if(self.liveCells().count > 0) {
+            let newCells: [Cell] = self.newCells()
+            let dyingCells: [Cell] = self.dyingCells()
+            
+            newCells.map { $0.state = .alive }
+            dyingCells.map { $0.state = .dead }
+
+            
             
             self.delegate?.worldOfWarcraftNewRound(self)
-            let deadlineTime = DispatchTime.now() + .seconds(2)
+            let deadlineTime = DispatchTime.now() + .seconds(5)
             DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
                 self.startIterate()
             }
@@ -84,7 +103,7 @@ class WorldOfWarcraft {
     
     
     private func newCells() -> [Cell]! {
-        return self.deadCells.filter {
+        return self.deadCells().filter {
             let neighborsCount = self.neighborCells(for: $0).filter {
                 $0.state == .alive }.count
                 
@@ -93,7 +112,7 @@ class WorldOfWarcraft {
     }
     
     private func dyingCells() -> [Cell]! {
-        return self.liveCells.filter {
+        return self.liveCells().filter {
             let liveNeighborCount = self.neighborCells(for: $0).filter { $0.state == .alive }.count
             return liveNeighborCount != 2 && liveNeighborCount != 3
         }
