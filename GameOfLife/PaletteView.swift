@@ -12,6 +12,11 @@ class PaletteView: UIView, WorldOfWarcraftDelegate {
     
     var world: WorldOfWarcraft? {
         didSet {
+            if let world = self.world, world.playMode == .auto {
+                self.isUserInteractionEnabled = false
+            } else {
+                self.isUserInteractionEnabled = true
+            }
             self.setNeedsDisplay()
         }
     }
@@ -55,12 +60,6 @@ class PaletteView: UIView, WorldOfWarcraftDelegate {
                 let cellY = (cell.y) * Int(cellHeight)
                 
                 let cellFrame = CGRect(x: Int(cellX), y: Int(cellY), width: cellWidth, height: cellHeight)
-                
-//                if index % 2 == 0 {
-//                    context.setFillColor(UIColor.yellow.cgColor)
-//                } else {
-//                    context.setFillColor(UIColor.red.cgColor)
-//                }
                 cell.frame = cellFrame
                 var color: UIColor!
                 switch cell.state {
@@ -69,14 +68,14 @@ class PaletteView: UIView, WorldOfWarcraftDelegate {
                     break
                 
                 case .dead:
-                    color = .yellow
+                    color = .black
                     break
             
                 default:
                     color = .black
                 }
                 context.setFillColor(color.cgColor)
-                       context.setStrokeColor(UIColor.purple.cgColor)
+                       context.setStrokeColor(UIColor.black.cgColor)
                 context.addRect(cellFrame)
          
                 context.fillPath()

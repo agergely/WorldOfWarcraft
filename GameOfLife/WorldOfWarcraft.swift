@@ -24,7 +24,9 @@ class WorldOfWarcraft {
     var cells: [Cell]!
     var dimension: Int! {
         didSet {
-            self.reset()
+            if let _ = self.dimension {
+                self.reset()
+            }
         }
     }
     var playMode: PlayMode = .manual
@@ -44,50 +46,11 @@ class WorldOfWarcraft {
         for i in 0..<self.dimension {
             for j in 0..<self.dimension {
                 let cell = Cell(x: j, y: i)
-                //                if (i + j) % 2 == 0 {
-                //                    cell.state = .alive
-                //                }
-                //                if i == 4 && j == 3 {
-                //                    cell.state = .alive
-                //                }
-                //
-                //                if i == 5 && j == 4 {
-                //                    cell.state = .alive
-                //                }
-                //
-                //                if i == 3 && j == 5 {
-                //                    cell.state = .alive
-                //                }
-                //
-                //                if i == 4 && j == 5 {
-                //                    cell.state = .alive
-                //                }
-                //
-                //                if i == 5 && j == 5 {
-                //                    cell.state = .alive
-                //                }
-//                
-//                if i == 3 && j == 3 {
-//                    cell.state = .alive
-//                }
-//                
-//                if i == 3 && j == 4 {
-//                    cell.state = .alive
-//                }
-//                
-//                if i == 3 && j == 5 {
-//                    cell.state = .alive
-//                }
                 cells.append(cell)
             }
         }
         self.delegate?.worldOfWarcraftNewRound(self)
 
-    }
-    
-    func setup() {
-        self.dimension = 20
-        
     }
     
     func startIterate() {

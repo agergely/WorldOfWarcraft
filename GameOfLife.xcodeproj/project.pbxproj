@@ -13,6 +13,9 @@
 		7F9F17DE1E41D75E00CF9AB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F9F17DD1E41D75E00CF9AB2 /* Assets.xcassets */; };
 		7F9F17E11E41D75E00CF9AB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F9F17DF1E41D75E00CF9AB2 /* LaunchScreen.storyboard */; };
 		7F9F17EF1E41E8F300CF9AB2 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9F17EE1E41E8F300CF9AB2 /* Cell.swift */; };
+		7F9F17F11E41E9AA00CF9AB2 /* WorldOfWarcraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9F17F01E41E9AA00CF9AB2 /* WorldOfWarcraft.swift */; };
+		7F9F17F31E41EEC100CF9AB2 /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9F17F21E41EEC100CF9AB2 /* PaletteView.swift */; };
+		7F9F17F51E42525F00CF9AB2 /* UITextField+DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9F17F41E42525F00CF9AB2 /* UITextField+DoneButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		7F9F17E01E41D75E00CF9AB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F9F17E21E41D75E00CF9AB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F9F17EE1E41E8F300CF9AB2 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		7F9F17F01E41E9AA00CF9AB2 /* WorldOfWarcraft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldOfWarcraft.swift; sourceTree = "<group>"; };
+		7F9F17F21E41EEC100CF9AB2 /* PaletteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
+		7F9F17F41E42525F00CF9AB2 /* UITextField+DoneButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+DoneButton.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,10 +65,13 @@
 				7F9F17D61E41D75E00CF9AB2 /* AppDelegate.swift */,
 				7F9F17D81E41D75E00CF9AB2 /* ViewController.swift */,
 				7F9F17EE1E41E8F300CF9AB2 /* Cell.swift */,
+				7F9F17F01E41E9AA00CF9AB2 /* WorldOfWarcraft.swift */,
 				7F9F17DA1E41D75E00CF9AB2 /* Main.storyboard */,
 				7F9F17DD1E41D75E00CF9AB2 /* Assets.xcassets */,
 				7F9F17DF1E41D75E00CF9AB2 /* LaunchScreen.storyboard */,
 				7F9F17E21E41D75E00CF9AB2 /* Info.plist */,
+				7F9F17F21E41EEC100CF9AB2 /* PaletteView.swift */,
+				7F9F17F41E42525F00CF9AB2 /* UITextField+DoneButton.swift */,
 			);
 			path = GameOfLife;
 			sourceTree = "<group>";
@@ -100,7 +109,7 @@
 					7F9F17D21E41D75E00CF9AB2 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = YUJ7UC2TQS;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -143,6 +152,9 @@
 				7F9F17D91E41D75E00CF9AB2 /* ViewController.swift in Sources */,
 				7F9F17D71E41D75E00CF9AB2 /* AppDelegate.swift in Sources */,
 				7F9F17EF1E41E8F300CF9AB2 /* Cell.swift in Sources */,
+				7F9F17F51E42525F00CF9AB2 /* UITextField+DoneButton.swift in Sources */,
+				7F9F17F31E41EEC100CF9AB2 /* PaletteView.swift in Sources */,
+				7F9F17F11E41E9AA00CF9AB2 /* WorldOfWarcraft.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,9 +279,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = YUJ7UC2TQS;
 				INFOPLIST_FILE = GameOfLife/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ott;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.word;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ccb84086-227f-4606-a970-e5327fa25fd7";
+				PROVISIONING_PROFILE_SPECIFIER = "Test Dev";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -278,10 +293,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = YUJ7UC2TQS;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = GameOfLife/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ott;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.word;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
