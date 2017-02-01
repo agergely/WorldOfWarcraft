@@ -64,7 +64,7 @@ class WorldOfWarcraft {
 
             self.delegate?.worldOfWarcraftNewRound(self)
             if (self.playMode == .auto) {
-                let deadlineTime = DispatchTime.now() + .seconds(5)
+                let deadlineTime = DispatchTime.now() + .seconds(1)
                 DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
                     self.startIterate()
                 }
